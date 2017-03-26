@@ -24,8 +24,11 @@ export const sendFormLogin = values => {
 }
 ```
 * **type** is an Array with action creators
-The middleware will call loginSending before apiCall and loginSuccess when promise got resolved, if got an error, loginError will be called.
 * **apiCall** must be a function that return a Promise
+
+The middleware will call loginSending before apiCall and loginSuccess when promise got resolved, if got an error, loginError will be called.
+
+loginSending -> apiCall -> loginSuccess / loginError
 
 ### Reducer / Action creators example to use with the action above
 ```javascript
