@@ -1,7 +1,9 @@
 # fetch-middleware
 
-Redux middleware for async actions
+Redux middleware for async actions (side-effects)
 
+* FSA
+* Promise based
 
 # usage example
 
@@ -45,7 +47,11 @@ export default (state = initialState, action) => {
         return state;
     }
 }
+```
 
+And then you create an action passing all action creators and the apiCall method
+
+```javascript
 export const sendFormLogin = values => {
     return {
         type : [

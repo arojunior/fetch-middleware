@@ -3,8 +3,8 @@ var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var path = require('path');
 var env = require('yargs').argv.mode;
 
-var libraryName = 'Request';
-var fileName = 'handle-requests';
+var libraryName = 'fetchMiddleware';
+var fileName = 'fetch-middleware';
 
 var plugins = [], outputFile;
 
