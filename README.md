@@ -5,8 +5,29 @@ Redux middleware for async actions (side-effects)
 * FSA
 * Promise based
 
-# usage example
+#### Usage example
 
+Create an action passing all action creators and the apiCall method
+
+```javascript
+export const sendFormLogin = values => {
+    return {
+        type : [
+            loginSending,
+            loginSuccess,
+            loginError
+        ],
+        payload : {
+            apiCall : () => axios.post('/api/login', values)
+        }
+    }
+}
+```
+* **type** is an Array with action creators
+The middleware will call loginSending before apiCall and loginSuccess when promise got resolved, if got an error, loginError will be called.
+* **apiCall** must be a function that return a Promise
+
+### Reducer / Action creators example to use with the action above
 ```javascript
 import axios from 'axios'
 import {createAction} from 'redux-actions'
@@ -45,23 +66,6 @@ export default (state = initialState, action) => {
                 }
       default:
         return state;
-    }
-}
-```
-
-And then you create an action passing all action creators and the apiCall method
-
-```javascript
-export const sendFormLogin = values => {
-    return {
-        type : [
-            loginSending,
-            loginSuccess,
-            loginError
-        ],
-        payload : {
-            apiCall : () => axios.post('/api/login', values)
-        }
     }
 }
 ```
