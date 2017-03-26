@@ -2,7 +2,7 @@
   "name": "fetch-middleware",
   "version": "1.0.0",
   "description": "Middlware for redux async actions",
-  "main": "lib/library.js",
+  "main": "lib/fetch-middleware.min.js",
   "scripts": {
     "build": "webpack --mode=build",
     "dev": "webpack --progress --colors --watch --mode=dev"
