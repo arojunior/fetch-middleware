@@ -20,7 +20,7 @@ export default function(store) {
 
         dispatch(requesting())
 
-        return payload.apiCall()
+        return payload.data()
                 .then(res => dispatch(success(res)))
                 .catch(err => dispatch(failure(err)))
     }

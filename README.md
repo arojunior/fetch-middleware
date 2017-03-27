@@ -10,7 +10,7 @@ Redux middleware for async actions (side-effects)
 Create an action passing all action creators and the apiCall method
 
 ```javascript
-export const sendFormLogin = values => {
+export const sendLoginForm = values => {
     return {
         type : [
             loginSending,
@@ -18,17 +18,18 @@ export const sendFormLogin = values => {
             loginError
         ],
         payload : {
-            apiCall : () => axios.post('/api/login', values)
+            data : () => axios.post('/api/login', values)
         }
     }
 }
 ```
-* **type** is an Array with action creators
-* **apiCall** must be a function that return a Promise
+* **type** is an Array with actions creators
+* **data** belongs to payload and must be a function that returns a Promise
+
+Basic flux: loginSending -> data -> loginSuccess / loginError
 
 The middleware will call loginSending before apiCall and loginSuccess when promise got resolved, if got an error, loginError will be called.
 
-loginSending -> apiCall -> loginSuccess / loginError
 
 ### Reducer / Action creators example to use with the action above
 ```javascript
