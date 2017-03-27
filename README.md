@@ -52,16 +52,16 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case GITHUB_FETCHING:
             return {...state,
-                    sending     : true
+                    fetching     : true
                     }
         case GITHUB_SUCCESS:
             return {...state,
-                    sending     : false,
-                    user        : action.payload.data
+                    fetching     : false,
+                    user         : action.payload.data
                   }
         case GITHUB_ERROR:
           return {...state,
-                  sending       : false
+                  fetching       : false
                 }
       default:
         return state;
