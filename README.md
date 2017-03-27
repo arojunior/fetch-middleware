@@ -10,15 +10,15 @@ Redux middleware for async actions (side-effects)
 Create an action passing all action creators and the apiCall method
 
 ```javascript
-export const sendLoginForm = values => {
+export const getUserFromGithub = username => {
     return {
         type : [
-            loginSending,
-            loginSuccess,
-            loginError
+            githubFetching,
+            githubSuccess,
+            githubError
         ],
         payload : {
-            data : () => axios.post('/api/login', values)
+            data : () => axios.get('https://api.github.com/users/' + username)
         }
     }
 }
@@ -30,43 +30,38 @@ Basic flux: loginSending -> data -> loginSuccess / loginError
 
 The middleware will call loginSending before apiCall and loginSuccess when promise got resolved, if got an error, loginError will be called.
 
-
 ### Reducer / Action creators example to use with the action above
 ```javascript
 import axios from 'axios'
 import {createAction} from 'redux-actions'
 
-const LOGIN_SENDING = 'modules/Login/SENDING'
-const LOGIN_SUCCESS = 'modules/Login/SUCCESS'
-const LOGIN_ERROR =  'modules/Login/ERROR'
+const GITHUB_FETCHING = 'modules/Github/FETCHING'
+const GITHUB_SUCCESS  = 'modules/Github/SUCCESS'
+const GITHUB_ERROR    = 'modules/Github/ERROR'
 
-const loginSending = createAction(LOGIN_SENDING)
-const loginError   = createAction(LOGIN_ERROR)
-const loginSuccess = createAction(LOGIN_SUCCESS, payload => {
-    console.log(payload.data)
-})
+export const githubFetching = createAction(GITHUB_FETCHING)
+export const githubError    = createAction(GITHUB_ERROR)
+export const githubSuccess  = createAction(GITHUB_SUCCESS)
 
 const initialState = {
-    text        : null,
-    sending     : false
+    fetching : false,
+    user     : null
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case LOGIN_SENDING:
+        case GITHUB_FETCHING:
             return {...state,
-                    text        : "Wait for it...",
                     sending     : true
                     }
-        case LOGIN_SUCCESS:
+        case GITHUB_SUCCESS:
             return {...state,
-                    text        : null,
-                    sending     : false
+                    sending     : false,
+                    user        : action.payload.data
                   }
-        case LOGIN_ERROR:
+        case GITHUB_ERROR:
           return {...state,
-                  text        : action.payload.data,
-                  sending     : false
+                  sending       : false
                 }
       default:
         return state;

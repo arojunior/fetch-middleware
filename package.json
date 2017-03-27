@@ -1,6 +1,6 @@
 {
   "name": "fetch-middleware",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Middlware for redux async actions",
   "main": "lib/fetch-middleware.min.js",
   "scripts": {
