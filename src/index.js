@@ -1,5 +1,7 @@
 const isArray = type => Array.isArray(type)
 
+const isFunc = val => typeof val === 'function'
+
 export default function(store) {
 
     const {dispatch} = store
@@ -8,7 +10,7 @@ export default function(store) {
 
         const {type, payload} = action
 
-        if ( ! isArray(type)) {
+        if ( ! isArray(type) || ! type.every(isFunc)) {
             return next(action)
         }
 
