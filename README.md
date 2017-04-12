@@ -1,6 +1,4 @@
-# fetch-middleware
-
-Redux middleware for async actions (side-effects)
+# Redux Middleware for async actions
 
 * FSA
 * Promise based
