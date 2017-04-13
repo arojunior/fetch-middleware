@@ -17,14 +17,14 @@ const githubSuccess  = createAction(GITHUB_SUCCESS)
 
 ```javascript
 export const getUserFromGithub = username => ({
-    type : [
-        githubFetching,
-        githubSuccess,
-        githubError
-    ],
-    payload : {
-        data : () => axios.get(`https://api.github.com/users/${username}`)
-    }
+  type : [
+    githubFetching,
+    githubSuccess,
+    githubError
+  ],
+  payload : {
+    data : () => axios.get(`https://api.github.com/users/${username}`)
+  }
 })
 ```
 * **type** is an Array with actions creators
@@ -52,24 +52,24 @@ import {handleActions} from 'redux-actions'
 import {GITHUB_FETCHING, GITHUB_SUCCESS, GITHUB_ERROR} from './actions'
 
 const initialState = {
-    fetching : false,
-    user     : null
+  fetching : false,
+  user     : null
 }
 
 const reducer = handleActions({
   [GITHUB_FETCHING]: (state, action) => ({
-      ...state,
-      sending     : true
+    ...state,
+    sending     : true
   }),
 
   [GITHUB_SUCCESS]: (state, action) => ({
-      sending     : false,
-      user        : action.payload.data
+    sending     : false,
+    user        : action.payload.data
   }),
 
   [GITHUB_ERROR]: (state, action) => ({
-      ...state,
-      sending     : false,
+    ...state,
+    sending     : false,
   })
 
 }, initialState);
@@ -83,43 +83,43 @@ export default reducer
 const githubFetching = () => ({ type : 'GITHUB_FETCHING' })
 const githubError    = () => ({ type : 'GITHUB_ERROR' })
 const githubSuccess  = payload => ({
-    type    : 'GITHUB_SUCCESS',
-    payload : payload
+  type    : 'GITHUB_SUCCESS',
+  payload : payload
 })
 
 const initialState = {
-    fetching : false,
-    user     : null
+  fetching : false,
+  user     : null
 }
 
 export const getUserFromGithub = username => ({
-    type : [
-        githubFetching,
-        githubSuccess,
-        githubError
-    ],
-    payload : {
-        data : () => axios.get(`https://api.github.com/users/${username}`)
-    }
+  type : [
+    githubFetching,
+    githubSuccess,
+    githubError
+  ],
+  payload : {
+      data : () => axios.get(`https://api.github.com/users/${username}`)
+  }
 })
 
 export default (state = initialState, action) => {
-    switch (action.type) {
-        case 'GITHUB_FETCHING':
-            return {...state,
-                    fetching     : true
-                    }
-        case 'GITHUB_SUCCESS':
-            return {...state,
-                    fetching     : false,
-                    user         : action.payload.data
-                  }
-        case 'GITHUB_ERROR':
-          return {...state,
-                  fetching       : false
-                }
-      default:
-        return state
-    }
+  switch (action.type) {
+    case 'GITHUB_FETCHING':
+      return {...state,
+              fetching     : true
+              }
+    case 'GITHUB_SUCCESS':
+      return {...state,
+              fetching     : false,
+              user         : action.payload.data
+              }
+    case 'GITHUB_ERROR':
+      return {...state,
+              fetching       : false
+            }
+    default:
+      return state
+  }
 }
 ```
