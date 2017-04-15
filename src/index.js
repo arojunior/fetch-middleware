@@ -20,10 +20,14 @@ export default function(store) {
             failure
         ] = type
 
-        dispatch(requesting())
+        const { data:request } = payload;
 
-        return payload.data()
-                .then(res => dispatch(success(res)))
-                .catch(err => dispatch(failure(err)))
+        return Promise.resolve(requesting) // pass the result of requesting action to promise chain
+                      .then(dispatch)
+                      .then(request) // do the user request call
+                      .then(success) // pass the success action
+                      .then(dispatch)
+                      .catch(failure) // in case of failure of any item in the chain, pass through failure action
+                      .then(dispatch)
     }
 }
