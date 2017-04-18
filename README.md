@@ -28,7 +28,9 @@ export const getUserFromGithub = username => ({
 })
 ```
 * **type** is an Array with actions creators
-* **data** belongs to **payload** and must be a function that returns a **Promise**
+* **payload** must have **data** property and it must to be a function that returns a **Promise**
+
+**Note:** you can pass more properties inside **payload** and it will be passed to success action.
 
 Basic flux: loginSending -> data -> loginSuccess / loginError
 

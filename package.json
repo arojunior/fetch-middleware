@@ -1,14 +1,13 @@
 {
   "name": "fetch-middleware",
-  "version": "1.0.4",
-  "description": "Middlware for redux async actions",
+  "version": "1.1.0",
+  "description": "Middleware for Redux async actions",
   "main": "lib/fetch-middleware.min.js",
   "scripts": {
     "build": "webpack --mode=build",
     "dev": "webpack --progress --colors --watch --mode=dev"
   },
   "devDependencies": {
-    "babel": "6.3.13",
     "babel-core": "6.1.18",
     "babel-loader": "6.1.0",
     "babel-plugin-add-module-exports": "0.1.2",
@@ -35,6 +34,5 @@
     "url": "https://github.com/arojunior/fetch-middleware/issues"
   },
   "homepage": "https://github.com/arojunior/fetch-middleware",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
