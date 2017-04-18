@@ -2,9 +2,19 @@ const isArray = type => Array.isArray(type)
 
 const isFunc = val => typeof val === 'function'
 
+
+/**
+ * Factory to create action dispatchers
+ * @param {Function} dispatch - the store dispatcher
+ * @param {Function} fn - the redux action to be dispatched
+ * @returns {Function} a function that dispatch data through the redux action
+ */
+const createDispatcher = (dispatch, fn) => data => { dispatch(fn(data)) } 
+
 export default function(store) {
 
-    const {dispatch} = store
+    const { dispatch } = store
+    
 
     return next => action => {
 
@@ -15,19 +25,21 @@ export default function(store) {
         }
 
         const [
-            requesting,
-            success,
-            failure
+            requestingAction,
+            successAction,
+            failureAction
         ] = type
+
+        const requestingDispatcher = createDispatcher(dispatch, requestingAction); 
+        const failureDispatcher = createDispatcher(dispatch, failureAction);
+        const successDispatcher = createDispatcher(dispatch, successAction);
 
         const { data:request } = payload;
 
-        return Promise.resolve(requesting) // pass the result of requesting action to promise chain
-                      .then(dispatch)
+        return Promise.resolve()
+                      .then(requestingDispatcher) // pass the result of requesting action to promise chain
                       .then(request) // do the user request call
-                      .then(success) // pass the success action
-                      .then(dispatch)
-                      .catch(failure) // in case of failure of any item in the chain, pass through failure action
-                      .then(dispatch)
+                      .then(successDispatcher) // pass the success action
+                      .catch(failureDispatcher) // in case of failure of any item in the chain, pass through failure action
     }
 }
