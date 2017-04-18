@@ -1,6 +1,6 @@
 const isArray = type => Array.isArray(type)
 
-const isFunc = val => typeof val === "function"
+const isFunc = val => typeof val === 'function'
 
 export default function(store) {
   const {dispatch} = store
