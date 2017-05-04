@@ -128,8 +128,7 @@ export default (state = initialState, action) => {
 }
 ```
 
-***Another Note***
-You have to pass the default methods to dispatch in case of success or failure, but the middleware will always return a Promise
+**Another Note:** You have to pass the default methods to dispatch in case of success or failure, but the middleware will always return a Promise.
 So if you need to do something after dispatch these methods, you are able to use:
 
 ```javascript
