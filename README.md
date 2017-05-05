@@ -1,5 +1,7 @@
 # Redux Middleware for async actions
 
+[![npm version](https://img.shields.io/npm/v/fetch-middleware.svg)](https://www.npmjs.com/package/fetch-middleware) [![npm downloads](https://img.shields.io/npm/dm/fetch-middleware.svg)](https://www.npmjs.com/package/fetch-middleware) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
 * FSA
 * Promise based
 
@@ -28,9 +30,11 @@ export const getUserFromGithub = username => ({
 })
 ```
 * **type** is an Array with actions creators
-* **data** belongs to **payload** and must be a function that returns a **Promise**
+* **payload** must have **data** property and it must to be a function that returns a **Promise**
 
-Basic flux: loginSending -> data -> loginSuccess / loginError
+**Note:** you can pass more properties inside **payload** and it will be passed to success action.
+
+Basic flow: loginSending -> data -> loginSuccess / loginError
 
 The middleware will call loginSending before apiCall and loginSuccess when promise got resolved, if got an error, loginError will be called.
 
@@ -122,4 +126,15 @@ export default (state = initialState, action) => {
       return state
   }
 }
+```
+
+**Another Note:** You have to pass the default methods to dispatch in case of success or failure, but the middleware will always return a Promise.
+So if you need to do something after dispatch these methods, you are able to use:
+
+```javascript
+dispatch(myAction())
+// here we got the dispatch of success or failure and then...
+.then()
+.catch()
+// and so on
 ```
